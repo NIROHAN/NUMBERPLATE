@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+
+    <script>
+        function validateAge() {
+            const ageInput = document.getElementById('age');
+            const age = ageInput.value;
+            const errorMessage = document.getElementById('age-error');
+
+            // Check if age is a valid number
+            if (isNaN(age) || age <= 0) {
+                errorMessage.textContent = "Age must be a positive number.";
+                return false;
+            } else {
+                errorMessage.textContent = "";
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Detected License Plate</h1>
+
+    <form method="POST" action="{{ url_for('save_details') }}" onsubmit="return validateAge()">
+        <!-- Editable license plate text -->
+        <label for="plate">License Plate: </label>
+        <input type="text" id="plate" name="plate" value="{{ plate }}" required>
+        <br><br>
+
+        <!-- Editable name and age fields -->
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" required>
+        <br><br>
+
+        <label for="age">Age: </label>
+        <input type="text" id="age" name="age" required> 
+        <br><br>
+        <label for="image_path">image_path: </label>
+        <input type="text" id="image_path" name="image_path" required> 
+        <br><br>
+        <!-- Display age validation error -->
+        <p id="age-error" class="error"></p>
+
+        <input type="submit" value="Save Details">
+    </form>
+
+    <p>{{ message }}</p>
+</body>
+</html>

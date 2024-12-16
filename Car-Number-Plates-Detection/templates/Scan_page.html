@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Plate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #555;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        .video-container {
+            margin-top: 30px;
+            display: inline-block;
+            width: 640px;
+            height: 480px;
+            border: 2px solid #ccc;
+            background-color: #000;
+            border-radius: 8px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container input {
+            display: block;
+            width: 200px;
+            margin: 10px auto;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+
+        .form-container button {
+            display: block;
+            width: 220px;
+            padding: 10px;
+            margin: 20px auto;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            margin-top: 40px;
+            color: #777;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Live Plate Scan</h1>
+
+    <div class="video-container">
+        <img src="{{ url_for('scan_plate') }}" alt="Live Feed">
+    </div>
+
+    <h3>Plate: {{ plate_text }}</h3>
+
+    <div class="form-container">
+        <!-- Always show the form to add name and age -->
+        <form method="POST" action="/save_details">
+            <input type="text" name="plate" value="{{ plate_text }}" readonly>
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="number" name="age" placeholder="Age" required>
+            <input type="hidden" name="image_path" value="{{ image_path }}">
+            <button type="submit">Save Details</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>Press <strong>s</strong> to save or <strong>q</strong> to stop the camera feed.</p>
+    </div>
+
+</body>
+</html>

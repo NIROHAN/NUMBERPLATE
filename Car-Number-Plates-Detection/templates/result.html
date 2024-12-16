@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: lightblue;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 18px;
+        }
+
+        .message {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="message">{{ message }}</h1>
+    
+    {% if plate %}
+        <p>Plate: {{ plate }}</p>
+        
+        {% if name and age %}
+            <p>Name: {{ name }}</p>
+            <p>Age: {{ age }}</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
